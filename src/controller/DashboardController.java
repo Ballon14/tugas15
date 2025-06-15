@@ -37,7 +37,7 @@ public class DashboardController {
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmationAlert.setTitle("Konfirmasi Logout");
         confirmationAlert.setHeaderText("Apakah Anda yakin ingin keluar?");
-        confirmationAlert.setContentText("Anda akan kembali ke halaman login.");
+        confirmationAlert.setContentText("Anda akan keluar dari sistem.");
         
         ButtonType yesButton = new ButtonType("Ya, Keluar");
         ButtonType noButton = new ButtonType("Batal", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -56,7 +56,7 @@ public class DashboardController {
 
             Stage stage = (Stage) logoutButton.getScene().getWindow();
 
-            Parent root = FXMLLoader.load(getClass().getResource("/login/login.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/login/logout.fxml"));
             Scene scene = new Scene(root);
 
             stage.setScene(scene);
