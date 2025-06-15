@@ -1,47 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
    <children>
-      <VBox alignment="CENTER" layoutX="100.0" layoutY="80.0" prefWidth="400.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0.5, 0, 5);">
+      <HBox alignment="CENTER_RIGHT" layoutY="0.0" prefHeight="60.0" prefWidth="700.0" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 10;">
+         <children>
+            <Label fx:id="userInfoLabel" style="-fx-background-color: rgba(255,255,255,0.2); -fx-padding: 8 15; -fx-background-radius: 20; -fx-text-fill: black;" text="User: admin" textFill="white">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+
+      <VBox alignment="CENTER" layoutX="100.0" layoutY="100.0" prefWidth="500.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0.5, 0, 5);">
          <padding>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </padding>
          
-         <!-- Welcome Message -->
-         <Label fx:id="welcomeLabel" text="Selamat Datang di Dashboard!" textFill="#333">
-            <font>
-               <Font name="System Bold" size="28.0" />
-            </font>
-         </Label>
+         <VBox alignment="CENTER" spacing="15.0">
+            <Label fx:id="welcomeLabel" text="Selamat Datang di Dashboard!" textAlignment="CENTER" textFill="#333">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            
+            <Label text="Anda berhasil masuk ke sistem keamanan!" textAlignment="CENTER" textFill="#666">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </VBox>
          
-         <!-- Dashboard Icon/Emoji -->
-         <Label text="🎉" textFill="#667eea">
-            <font>
-               <Font size="60.0" />
-            </font>
-         </Label>
-         
-         <!-- Description -->
-         <Label text="Anda berhasil masuk ke sistem!" textFill="#666">
-            <font>
-               <Font size="16.0" />
-            </font>
-         </Label>
-         
-         <!-- Logout Button -->
-         <Button fx:id="logoutButton" onAction="#logout" prefHeight="45.0" prefWidth="150.0" text="LOGOUT" 
-                 style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.3, 0, 2);">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Button>
+         <VBox alignment="CENTER" spacing="15.0">
+            <Label text="Sesi Login Aktif" textFill="#666">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            
+            <Button fx:id="logoutButton" onAction="#logout" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0.4, 0, 3);" text="🚪 KELUAR">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </VBox>
       </VBox>
+      
+      <Label layoutX="250.0" layoutY="470.0" text="© 2025 Sistem Keamanan - Dashboard v1.0" textFill="rgba(255,255,255,0.7)">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

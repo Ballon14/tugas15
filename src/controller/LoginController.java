@@ -41,7 +41,6 @@ public class LoginController {
 
     private String generatedCode;
 
-    // Credentials
     private static final String VALID_USERNAME = "admin";
     private static final String VALID_PASSWORD = "admin123";
 
@@ -52,7 +51,6 @@ public class LoginController {
     }
 
     private void setupEventHandlers() {
-        // Enter key support
         usernameField.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
                 passwordField.requestFocus();
@@ -82,13 +80,11 @@ public class LoginController {
         String inputPassword = passwordField.getText();
         String inputSecurityCode = securityCodeField.getText().trim();
 
-        // Validasi input kosong
         if (inputUsername.isEmpty() || inputPassword.isEmpty() || inputSecurityCode.isEmpty()) {
             statusLabel.setText("Harap isi semua field!");
             return;
         }
 
-        // Validasi credentials
         if (validateCredentials(inputUsername, inputPassword, inputSecurityCode)) {
             loginSuccess();
         } else {
@@ -106,13 +102,12 @@ public class LoginController {
         System.out.println("Login berhasil untuk user: " + usernameField.getText());
         statusLabel.setText("Login berhasil!");
         
-        // Pindah ke dashboard
         navigateToDashboard();
     }
 
     private void loginFailed() {
         statusLabel.setText("Username, password, atau kode keamanan salah!");
-        generateNewSecurityCode(); // Generate kode baru
+        generateNewSecurityCode();
         passwordField.clear();
     }
 
@@ -122,7 +117,6 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboard.fxml"));
         Parent root = loader.load();
         
-        // Pass username to dashboard controller
         DashboardController dashboardController = loader.getController();
         dashboardController.setWelcomeMessage(usernameField.getText());
         

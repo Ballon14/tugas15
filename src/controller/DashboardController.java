@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Optional;
 
 public class DashboardController {
 
@@ -16,28 +17,45 @@ public class DashboardController {
     @FXML
     private Label welcomeLabel;
 
-    private String currentUser;
-
     @FXML
-    public void initialize() {
-        // Initialization code if needed
-    }
+    private Label userInfoLabel;
+
+    private String currentUser;
 
     public void setWelcomeMessage(String username) {
         this.currentUser = username;
         if (welcomeLabel != null) {
             welcomeLabel.setText("Selamat Datang, " + username + "!");
         }
+        if (userInfoLabel != null) {
+            userInfoLabel.setText("User: " + username);
+        }
     }
 
     @FXML
     public void logout() {
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Konfirmasi Logout");
+        confirmationAlert.setHeaderText("Apakah Anda yakin ingin keluar?");
+        confirmationAlert.setContentText("Anda akan kembali ke halaman login.");
+        
+        ButtonType yesButton = new ButtonType("Ya, Keluar");
+        ButtonType noButton = new ButtonType("Batal", ButtonBar.ButtonData.CANCEL_CLOSE);
+        confirmationAlert.getButtonTypes().setAll(yesButton, noButton);
+
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+        
+        if (result.isPresent() && result.get() == yesButton) {
+            performLogout();
+        }
+    }
+
+    private void performLogout() {
         try {
             System.out.println("User " + currentUser + " logout");
 
             Stage stage = (Stage) logoutButton.getScene().getWindow();
 
-            // Kembali ke halaman login
             Parent root = FXMLLoader.load(getClass().getResource("/login/login.fxml"));
             Scene scene = new Scene(root);
 
