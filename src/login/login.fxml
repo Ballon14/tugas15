@@ -6,24 +6,60 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <Label layoutX="50.0" layoutY="50.0" text="Halaman Login">
+      <!-- Header -->
+      <Label layoutX="75.0" layoutY="30.0" text="Sistem Login Keamanan" textFill="#2c3e50">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="110.0" text="Username" />
-      <TextField fx:id="usernameField" layoutX="50.0" layoutY="130.0" prefWidth="200.0" />
-      <Label layoutX="50.0" layoutY="165.0" text="Password" />
-      <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="185.0" prefWidth="200.0" />
-      <Label fx:id="securityCodeLabel" layoutX="50.0" layoutY="225.0" text="Kode Keamanan: XXXX">
+      
+      <!-- Login Form -->
+      <Label layoutX="50.0" layoutY="80.0" text="Username:" textFill="#34495e">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <TextField fx:id="securityCodeField" layoutX="50.0" layoutY="245.0" prefWidth="200.0" promptText="Masukkan kode di atas" />
-      <Button fx:id="loginButton" layoutX="124.0" layoutY="290.0" onAction="#handleLoginButtonAction" text="Login" />
+      <TextField fx:id="usernameField" layoutX="50.0" layoutY="100.0" prefWidth="250.0" promptText="Masukkan username" style="-fx-background-radius: 5;" />
+      
+      <Label layoutX="50.0" layoutY="140.0" text="Password:" textFill="#34495e">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="160.0" prefWidth="250.0" promptText="Masukkan password" style="-fx-background-radius: 5;" />
+      
+      <!-- Security Code Section -->
+      <Label fx:id="securityCodeLabel" layoutX="50.0" layoutY="200.0" text="Kode Keamanan: XXXX" textFill="#e74c3c">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      
+      <HBox layoutX="50.0" layoutY="225.0" spacing="10.0">
+         <TextField fx:id="securityCodeField" prefWidth="200.0" promptText="Masukkan kode keamanan" style="-fx-background-radius: 5;" />
+         <Button onAction="#refreshSecurityCode" text="↻" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5;" />
+      </HBox>
+      
+      <!-- Login Button -->
+      <Button fx:id="loginButton" layoutX="125.0" layoutY="280.0" onAction="#handleLoginButtonAction" prefWidth="100.0" text="LOGIN" 
+              style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Button>
+      
+      <!-- Status/Info Labels -->
+      <Label fx:id="statusLabel" layoutX="50.0" layoutY="320.0" text="" textFill="#e74c3c" />
+      
+      <!-- Credential Info -->
+      <Label layoutX="50.0" layoutY="350.0" text="Demo: username='admin', password='admin123'" textFill="#7f8c8d">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
