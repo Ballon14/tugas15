@@ -6,13 +6,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
 import java.io.IOException;
 import java.util.Random;
 
 public class LoginController {
+
+    private void generateNewSecurityCode() {
+        Random random = new Random();
+        int code = 1000 + random.nextInt(9000);
+        generatedCode = String.valueOf(code);
+        securityCodeLabel.setText(generatedCode);
+        if (securityCodeField != null) {
+            securityCodeField.clear();
+        }
+    }
 
     @FXML
     private TextField usernameField;
@@ -30,14 +37,11 @@ public class LoginController {
     private Button loginButton;
 
     @FXML
-    private Label statusLabel; // Tambahan untuk status message
+    private Label statusLabel;
 
     private String generatedCode;
-    private int loginAttempts = 0;
-    private static final int MAX_ATTEMPTS = 3;
-    private boolean isBlocked = false;
 
-    // Credentials (dalam aplikasi nyata, ini seharusnya dari database)
+    // Credentials
     private static final String VALID_USERNAME = "admin";
     private static final String VALID_PASSWORD = "admin123";
 
@@ -72,28 +76,15 @@ public class LoginController {
         });
     }
 
-    private void generateNewSecurityCode() {
-        Random random = new Random();
-        int code = 1000 + random.nextInt(9000);
-        generatedCode = String.valueOf(code);
-        securityCodeLabel.setText("Kode Keamanan: " + generatedCode);
-        securityCodeField.clear();
-    }
-
     @FXML
     private void handleLoginButtonAction() throws IOException {
-        if (isBlocked) {
-            showErrorAlert("Akun Diblokir", "Terlalu banyak percobaan login. Coba lagi nanti.");
-            return;
-        }
-
         String inputUsername = usernameField.getText().trim();
         String inputPassword = passwordField.getText();
         String inputSecurityCode = securityCodeField.getText().trim();
 
         // Validasi input kosong
         if (inputUsername.isEmpty() || inputPassword.isEmpty() || inputSecurityCode.isEmpty()) {
-            showErrorAlert("Input Tidak Lengkap", "Harap isi semua field yang diperlukan!");
+            statusLabel.setText("Harap isi semua field!");
             return;
         }
 
@@ -113,44 +104,16 @@ public class LoginController {
 
     private void loginSuccess() throws IOException {
         System.out.println("Login berhasil untuk user: " + usernameField.getText());
-        
-        // Reset attempts
-        loginAttempts = 0;
+        statusLabel.setText("Login berhasil!");
         
         // Pindah ke dashboard
         navigateToDashboard();
     }
 
     private void loginFailed() {
-        loginAttempts++;
-        
-        if (loginAttempts >= MAX_ATTEMPTS) {
-            blockAccount();
-        } else {
-            int remainingAttempts = MAX_ATTEMPTS - loginAttempts;
-            showErrorAlert("Login Gagal", 
-                String.format("Username, password, atau kode keamanan salah!\n" +
-                            "Sisa percobaan: %d", remainingAttempts));
-        }
-        
-        // Generate kode baru dan reset security code field
-        generateNewSecurityCode();
-        passwordField.clear(); // Clear password for security
-    }
-
-    private void blockAccount() {
-        isBlocked = true;
-        showErrorAlert("Akun Diblokir", 
-            "Terlalu banyak percobaan login yang gagal.\n" +
-            "Akun diblokir sementara untuk keamanan.");
-        
-        // Auto unblock after 30 seconds (untuk demo)
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(30), e -> {
-            isBlocked = false;
-            loginAttempts = 0;
-            showInfoAlert("Akun Dibuka", "Akun Anda sudah dapat digunakan kembali.");
-        }));
-        timeline.play();
+        statusLabel.setText("Username, password, atau kode keamanan salah!");
+        generateNewSecurityCode(); // Generate kode baru
+        passwordField.clear();
     }
 
     private void navigateToDashboard() throws IOException {
@@ -172,19 +135,10 @@ public class LoginController {
     @FXML
     private void refreshSecurityCode() {
         generateNewSecurityCode();
-        showInfoAlert("Kode Diperbarui", "Kode keamanan baru telah dibuat.");
     }
 
     private void showErrorAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private void showInfoAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

@@ -5,61 +5,99 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <!-- Header -->
-      <Label layoutX="75.0" layoutY="30.0" text="Sistem Login Keamanan" textFill="#2c3e50">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      
-      <!-- Login Form -->
-      <Label layoutX="50.0" layoutY="80.0" text="Username:" textFill="#34495e">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="usernameField" layoutX="50.0" layoutY="100.0" prefWidth="250.0" promptText="Masukkan username" style="-fx-background-radius: 5;" />
-      
-      <Label layoutX="50.0" layoutY="140.0" text="Password:" textFill="#34495e">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="160.0" prefWidth="250.0" promptText="Masukkan password" style="-fx-background-radius: 5;" />
-      
-      <!-- Security Code Section -->
-      <Label fx:id="securityCodeLabel" layoutX="50.0" layoutY="200.0" text="Kode Keamanan: XXXX" textFill="#e74c3c">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      
-      <HBox layoutX="50.0" layoutY="225.0" spacing="10.0">
-         <TextField fx:id="securityCodeField" prefWidth="200.0" promptText="Masukkan kode keamanan" style="-fx-background-radius: 5;" />
-         <Button onAction="#refreshSecurityCode" text="↻" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5;" />
-      </HBox>
-      
-      <!-- Login Button -->
-      <Button fx:id="loginButton" layoutX="125.0" layoutY="280.0" onAction="#handleLoginButtonAction" prefWidth="100.0" text="LOGIN" 
-              style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Button>
-      
-      <!-- Status/Info Labels -->
-      <Label fx:id="statusLabel" layoutX="50.0" layoutY="320.0" text="" textFill="#e74c3c" />
-      
-      <!-- Credential Info -->
-      <Label layoutX="50.0" layoutY="350.0" text="Demo: username='admin', password='admin123'" textFill="#7f8c8d">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefWidth="300.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0.5, 0, 5);">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         
+         <!-- Header -->
+         <Label text="LOGIN" textFill="#333">
+            <font>
+               <Font name="System Bold" size="32.0" />
+            </font>
+         </Label>
+         
+         <Label text="Masuk ke akun Anda" textFill="#666">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         
+         <!-- Username Field -->
+         <VBox spacing="8.0">
+            <Label text="Username" textFill="#333">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="usernameField" prefHeight="45.0" promptText="Masukkan username" 
+                      style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 0 15 0 15; -fx-font-size: 14;">
+            </TextField>
+         </VBox>
+         
+         <!-- Password Field -->
+         <VBox spacing="8.0">
+            <Label text="Password" textFill="#333">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="passwordField" prefHeight="45.0" promptText="Masukkan password" 
+                          style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 0 15 0 15; -fx-font-size: 14;">
+            </PasswordField>
+         </VBox>
+         
+         <!-- Security Code Section -->
+         <VBox spacing="8.0">
+            <Label text="Kode Keamanan" textFill="#333">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <VBox spacing="5.0">
+               <Label fx:id="securityCodeLabel" text="1234" textFill="#667eea" style="-fx-background-color: #f8f9ff; -fx-padding: 10; -fx-background-radius: 8; -fx-alignment: center;">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font>
+               </Label>
+               <VBox spacing="5.0">
+                  <TextField fx:id="securityCodeField" prefHeight="45.0" promptText="Masukkan kode keamanan" 
+                            style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 0 15 0 15; -fx-font-size: 14;">
+                  </TextField>
+                  <Button onAction="#refreshSecurityCode" text="🔄 Kode Baru" prefHeight="30.0" 
+                         style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 11;">
+                  </Button>
+               </VBox>
+            </VBox>
+         </VBox>
+         
+         <!-- Login Button -->
+         <Button fx:id="loginButton" onAction="#handleLoginButtonAction" prefHeight="45.0" prefWidth="220.0" text="MASUK" 
+                 style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.3, 0, 2);">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Button>
+         
+         <!-- Status Label -->
+         <Label fx:id="statusLabel" text="" textFill="#e74c3c">
+            <font>
+               <Font size="12.0" />
+            </font>
+         </Label>
+         
+         <!-- Demo Info -->
+         <Label text="Demo: admin / admin123" textFill="#999">
+            <font>
+               <Font size="11.0" />
+            </font>
+         </Label>
+      </VBox>
    </children>
 </AnchorPane>
