@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="350.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+   <children>
+      <Label layoutX="50.0" layoutY="50.0" text="Halaman Login">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="110.0" text="Username" />
+      <TextField fx:id="usernameField" layoutX="50.0" layoutY="130.0" prefWidth="200.0" />
+      <Label layoutX="50.0" layoutY="165.0" text="Password" />
+      <PasswordField fx:id="passwordField" layoutX="50.0" layoutY="185.0" prefWidth="200.0" />
+      <Label fx:id="securityCodeLabel" layoutX="50.0" layoutY="225.0" text="Kode Keamanan: XXXX">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="securityCodeField" layoutX="50.0" layoutY="245.0" prefWidth="200.0" promptText="Masukkan kode di atas" />
+      <Button fx:id="loginButton" layoutX="124.0" layoutY="290.0" onAction="#handleLoginButtonAction" text="Login" />
+   </children>
+</AnchorPane>

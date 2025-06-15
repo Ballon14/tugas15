@@ -1,0 +1,18 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "C:\\Program Files\\Java\\javafx-sdk-24.0.1\\lib\\**/*.jar"
+    ],
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.debug.settings.console": "integratedTerminal",
+    "java.runtime.arguments": [
+        "--module-path",
+        "C:\\Program Files\\Java\\javafx-sdk-24.0.1\\lib",
+        "--add-modules",
+        "javafx.controls,javafx.fxml,javafx.graphics,javafx.base"
+    ]
+}
