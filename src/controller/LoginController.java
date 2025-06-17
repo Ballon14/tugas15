@@ -98,6 +98,10 @@ public class LoginController {
             return;
         }
 
+        // Debug: Print input values (remove in production)
+        System.out.println("Debug - Username: '" + username + "'");
+        System.out.println("Debug - Password: '" + password + "'");
+
         // Validasi login dengan database
         if (validateUserFromDatabase(username, password)) {
             loginSuccess(username);
@@ -107,7 +111,8 @@ public class LoginController {
     }
 
     private boolean validateUserFromDatabase(String username, String password) {
-        String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+        // Query yang lebih robust dengan LOWER untuk case-insensitive comparison
+        String query = "SELECT username, password FROM users WHERE LOWER(username) = LOWER(?)";
         
         try (Connection connection = DatabaseConnection.connect()) {
             if (connection == null) {
@@ -117,15 +122,34 @@ public class LoginController {
 
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, username);
-                statement.setString(2, password);
                 
                 try (ResultSet resultSet = statement.executeQuery()) {
-                    return resultSet.next(); // Mengembalikan true jika pengguna ditemukan
+                    if (resultSet.next()) {
+                        String dbUsername = resultSet.getString("username");
+                        String dbPassword = resultSet.getString("password");
+                        
+                        // Debug: Print database values (remove in production)
+                        System.out.println("Debug - DB Username: '" + dbUsername + "'");
+                        System.out.println("Debug - DB Password: '" + dbPassword + "'");
+                        
+                        // Simple password comparison (consider using hashing in production)
+                        boolean passwordMatch = password.equals(dbPassword);
+                        
+                        if (!passwordMatch) {
+                            System.out.println("Debug - Password mismatch!");
+                        }
+                        
+                        return passwordMatch;
+                    } else {
+                        System.out.println("Debug - User not found in database!");
+                        return false;
+                    }
                 }
             }
             
         } catch (SQLException e) {
             System.err.println("Database error: " + e.getMessage());
+            e.printStackTrace();
             showStatus("Error database: " + e.getMessage(), true);
             return false;
         }
