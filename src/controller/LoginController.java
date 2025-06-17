@@ -9,23 +9,12 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 
 public class LoginController {
-
-    private void generateNewSecurityCode() {
-        Random random = new Random();
-        int code = 1000 + random.nextInt(9000);
-        generatedCode = String.valueOf(code);
-        securityCodeLabel.setText(generatedCode);
-        if (securityCodeField != null) {
-            securityCodeField.clear();
-        }
-    }
 
     @FXML
     private TextField usernameField;
@@ -50,10 +39,22 @@ public class LoginController {
     @FXML
     public void initialize() {
         generateNewSecurityCode();
-        setupEventHandlers();
+        setupKeyEvents();
     }
 
-    private void setupEventHandlers() {
+    private void generateNewSecurityCode() {
+        Random random = new Random();
+        int code = 1000 + random.nextInt(9000);
+        generatedCode = String.valueOf(code);
+        securityCodeLabel.setText(generatedCode);
+        
+        if (securityCodeField != null) {
+            securityCodeField.clear();
+        }
+    }
+
+    private void setupKeyEvents() {
+        // Enter key navigation
         usernameField.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
                 passwordField.requestFocus();
@@ -68,64 +69,95 @@ public class LoginController {
 
         securityCodeField.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
-                try {
-                    handleLoginButtonAction();
-                } catch (IOException e) {
-                    showErrorAlert("Error", "Terjadi kesalahan sistem: " + e.getMessage());
-                }
+                handleLogin();
             }
         });
     }
 
     @FXML
-    private void handleLoginButtonAction() throws IOException {
-        String query = SELECT * FROM users WHERE username = ? AND password = ?;
-        try (Connection connection = database.DatabaseConnection.connect()) {
-            if (username.getText().isEmpty() || password.getText().isEmpty()){
-                System.out.println("Please fill in all fields.");
-            }
-        }
-        String inputSecurityCode = securityCodeField.getText().trim();
+    private void handleLoginButtonAction() {
+        handleLogin();
+    }
 
-        if (inputUsername.isEmpty() || inputPassword.isEmpty() || inputSecurityCode.isEmpty()) {
-            statusLabel.setText("Harap isi semua field!");
+    private void handleLogin() {
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
+        String securityCode = securityCodeField.getText().trim();
+
+        // Validasi input kosong
+        if (username.isEmpty() || password.isEmpty() || securityCode.isEmpty()) {
+            showStatus("Harap isi semua field!", true);
             return;
         }
 
-        if (validateCredentials(inputUsername, inputPassword, inputSecurityCode)) {
-            loginSuccess();
+        // Validasi kode keamanan
+        if (!securityCode.equals(generatedCode)) {
+            showStatus("Kode keamanan salah!", true);
+            generateNewSecurityCode();
+            passwordField.clear();
+            return;
+        }
+
+        // Validasi login dengan database
+        if (validateUserFromDatabase(username, password)) {
+            loginSuccess(username);
         } else {
             loginFailed();
         }
     }
 
-    private boolean validateCredentials(String username, String password, String securityCode) {
-        return VALID_USERNAME.equals(username) && 
-               VALID_PASSWORD.equals(password) && 
-               generatedCode.equals(securityCode);
+    private boolean validateUserFromDatabase(String username, String password) {
+        String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+        
+        try (Connection connection = DatabaseConnection.connect()) {
+            if (connection == null) {
+                showStatus("Gagal terhubung ke database!", true);
+                return false;
+            }
+
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, username);
+                statement.setString(2, password);
+                
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    return resultSet.next(); // Return true jika user ditemukan
+                }
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Database error: " + e.getMessage());
+            showStatus("Error database: " + e.getMessage(), true);
+            return false;
+        }
     }
 
-    private void loginSuccess() throws IOException {
-        System.out.println("Login berhasil untuk user: " + usernameField.getText());
-        statusLabel.setText("Login berhasil!");
+    private void loginSuccess(String username) {
+        System.out.println("Login berhasil untuk user: " + username);
+        showStatus("Login berhasil!", false);
         
-        navigateToDashboard();
+        try {
+            navigateToDashboard(username);
+        } catch (IOException e) {
+            showStatus("Error membuka dashboard: " + e.getMessage(), true);
+        }
     }
 
     private void loginFailed() {
-        statusLabel.setText("Username, password, atau kode keamanan salah!");
+        showStatus("Username atau password salah!", true);
         generateNewSecurityCode();
         passwordField.clear();
+        securityCodeField.clear();
     }
 
-    private void navigateToDashboard() throws IOException {
+    private void navigateToDashboard(String username) throws IOException {
         Stage stage = (Stage) loginButton.getScene().getWindow();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboard.fxml"));
         Parent root = loader.load();
         
+        // Set welcome message di dashboard
         DashboardController dashboardController = loader.getController();
-        dashboardController.setWelcomeMessage(usernameField.getText());
+        dashboardController.setWelcomeMessage(username);
         
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -138,11 +170,12 @@ public class LoginController {
         generateNewSecurityCode();
     }
 
-    private void showErrorAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    private void showStatus(String message, boolean isError) {
+        statusLabel.setText(message);
+        if (isError) {
+            statusLabel.setStyle("-fx-text-fill: #e74c3c;");
+        } else {
+            statusLabel.setStyle("-fx-text-fill: #27ae60;");
+        }
     }
 }
