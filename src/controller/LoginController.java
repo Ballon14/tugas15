@@ -54,7 +54,7 @@ public class LoginController {
     }
 
     private void setupKeyEvents() {
-        // Enter key navigation
+        // Navigasi dengan tombol Enter
         usernameField.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
                 passwordField.requestFocus();
@@ -120,7 +120,7 @@ public class LoginController {
                 statement.setString(2, password);
                 
                 try (ResultSet resultSet = statement.executeQuery()) {
-                    return resultSet.next(); // Return true jika user ditemukan
+                    return resultSet.next(); // Mengembalikan true jika pengguna ditemukan
                 }
             }
             
@@ -155,7 +155,7 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboard.fxml"));
         Parent root = loader.load();
         
-        // Set welcome message di dashboard
+        // Mengatur pesan selamat datang di dashboard
         DashboardController dashboardController = loader.getController();
         dashboardController.setWelcomeMessage(username);
         
