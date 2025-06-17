@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,13 +69,13 @@ public class LoginController {
 
         securityCodeField.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
-                btnLogin(null);
+                handleLoginButtonAction(null);
             }
         });
     }
 
     @FXML
-    void btnLogin(ActionEvent event) {
+    void handleLoginButtonAction(ActionEvent event) {
         String query = "SELECT * FROM users WHERE username = ? AND password = ?";
         try (Connection connection = DatabaseConnection.connect()) {
             if (usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
