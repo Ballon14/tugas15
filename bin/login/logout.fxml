@@ -23,7 +23,7 @@
             
             <Label text="LOGOUT BERHASIL" textAlignment="CENTER" styleClass="login-title">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
             
