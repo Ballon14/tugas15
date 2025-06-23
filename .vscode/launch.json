@@ -3,13 +3,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "LoginForm",
-            "request": "launch",
-            "mainClass": "swing.LoginForm",
-            "projectName": "JavaTugasPengganti_f0786700"
-        },
-        {
-            "type": "java",
             "name": "Launch JavaFX App",
             "request": "launch",
             "mainClass": "MainApp",

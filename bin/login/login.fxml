@@ -5,82 +5,73 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="400.0" style="-fx-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="650.0" prefWidth="400.0" stylesheets="@login.css" styleClass="root-pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefWidth="300.0" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0.5, 0, 5);">
+      <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefWidth="300.0" spacing="10.0" styleClass="login-card">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
-         
-         <Label text="LOGIN" textFill="#333">
+         <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" />
+         <Label text="LOGIN" textFill="#333" styleClass="login-title">
             <font>
                <Font name="System Bold" size="32.0" />
             </font>
          </Label>
-         
-         <Label text="Masuk ke akun Anda" textFill="#666">
+         <Label text="Masuk ke akun Anda" textFill="#666" styleClass="login-subtitle">
             <font>
                <Font size="14.0" />
             </font>
          </Label>
-         
          <VBox spacing="8.0">
-            <Label text="Username" textFill="#333">
+            <Label text="Username" textFill="#333" styleClass="input-label">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="usernameField" prefHeight="45.0" promptText="Masukkan username" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 0 15 0 15; -fx-font-size: 14;">
-            </TextField>
+            <TextField fx:id="usernameField" prefHeight="45.0" promptText="Masukkan username" styleClass="input-field" />
          </VBox>
-         
          <VBox spacing="8.0">
-            <Label text="Password" textFill="#333">
+            <Label text="Password" textFill="#333" styleClass="input-label">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <PasswordField fx:id="passwordField" prefHeight="45.0" promptText="Masukkan password" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 0 15 0 15; -fx-font-size: 14;">
-            </PasswordField>
+            <PasswordField fx:id="passwordField" prefHeight="45.0" promptText="Masukkan password" styleClass="input-field" />
          </VBox>
-         
          <VBox spacing="8.0">
-            <Label text="Kode Keamanan" textFill="#333">
+            <Label text="Kode Keamanan" textFill="#333" styleClass="input-label">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
             <VBox spacing="5.0">
-               <Label fx:id="securityCodeLabel" style="-fx-background-color: #f8f9ff; -fx-padding: 10; -fx-background-radius: 8; -fx-alignment: center;" text="1234" textFill="#667eea">
+               <Label fx:id="securityCodeLabel" styleClass="security-code-label" text="1234" textFill="#667eea">
                   <font>
                      <Font name="System Bold" size="18.0" />
                   </font>
                </Label>
                <VBox spacing="5.0">
-                  <TextField fx:id="securityCodeField" prefHeight="45.0" promptText="Masukkan kode keamanan" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 0 15 0 15; -fx-font-size: 14;">
-                  </TextField>
-                  <Button onAction="#refreshSecurityCode" prefHeight="30.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand; -fx-font-size: 11;" text="🔄 Kode Baru">
-                  </Button>
+                  <TextField fx:id="securityCodeField" prefHeight="45.0" promptText="Masukkan kode keamanan" styleClass="input-field" />
+                  <Button onAction="#refreshSecurityCode" prefHeight="30.0" styleClass="refresh-btn" text="🔄 Kode Baru" />
                </VBox>
             </VBox>
          </VBox>
-         
-         <Button fx:id="loginButton" onAction="#handleLoginButtonAction" prefHeight="45.0" prefWidth="220.0" style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.3, 0, 2);" text="MASUK">
+         <Button fx:id="loginButton" onAction="#handleLoginButtonAction" prefHeight="45.0" prefWidth="220.0" styleClass="login-btn" text="MASUK">
             <font>
                <Font size="14.0" />
             </font>
          </Button>
-         <Button fx:id="registerButton" onAction="#handleRegisterButtonAction" prefHeight="45.0" prefWidth="220.0" style="-fx-background-color: #ddd; -fx-text-fill: #333; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;" text="DAFTAR">
+         <Button fx:id="registerButton" onAction="#handleRegisterButtonAction" prefHeight="45.0" prefWidth="220.0" styleClass="register-btn" text="DAFTAR">
             <font>
                <Font size="14.0" />
             </font>
          </Button>
-         
-         <Label fx:id="statusLabel" text="" textFill="#e74c3c">
+         <Label fx:id="statusLabel" text="" textFill="#e74c3c" styleClass="status-label">
             <font>
                <Font size="12.0" />
             </font>

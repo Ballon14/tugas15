@@ -3,16 +3,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="350.0" prefWidth="600.0" style="-fx-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+<AnchorPane prefHeight="350.0" prefWidth="600.0" stylesheets="@../login/login.css" styleClass="root-pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
    <children>
-      <HBox alignment="CENTER_RIGHT" layoutY="0.0" prefHeight="60.0" prefWidth="700.0" style="-fx-background-color: rgba(255,255,255,0.1); -fx-padding: 10;">
+      <HBox alignment="CENTER_RIGHT" layoutY="0.0" prefHeight="60.0" prefWidth="700.0" styleClass="dashboard-header">
          <children>
-            <Label fx:id="userInfoLabel" style="-fx-background-color: rgba(255,255,255,0.2); -fx-padding: 8 15; -fx-background-radius: 20; -fx-text-fill: black;" text="User: admin" textFill="white">
+            <Label fx:id="userInfoLabel" styleClass="dashboard-userinfo" text="User: admin">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -20,41 +21,37 @@
          </children>
       </HBox>
 
-      <VBox alignment="CENTER" layoutX="100.0" layoutY="100.0" prefWidth="500.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0.5, 0, 5);">
+      <VBox alignment="CENTER" layoutX="100.0" layoutY="100.0" prefWidth="500.0" spacing="30.0" styleClass="login-card">
          <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </padding>
-         
+         <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" />
          <VBox alignment="CENTER" spacing="15.0">
-            <Label fx:id="welcomeLabel" text="Selamat Datang di Dashboard!" textAlignment="CENTER" textFill="#333">
+            <Label fx:id="welcomeLabel" text="Selamat Datang di Dashboard!" textAlignment="CENTER" styleClass="login-title">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
-            
-            <Label text="Anda berhasil masuk ke sistem keamanan!" textAlignment="CENTER" textFill="#666">
+            <Label text="Anda berhasil masuk ke sistem keamanan!" textAlignment="CENTER" styleClass="login-subtitle">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
          </VBox>
-         
          <VBox alignment="CENTER" spacing="15.0">
-            <Label text="Sesi Login Aktif" textFill="#666">
+            <Label text="Sesi Login Aktif" styleClass="input-label">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            
-            <Button fx:id="logoutButton" onAction="#logout" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 12; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0.4, 0, 3);" text="🚪 KELUAR">
+            <Button fx:id="logoutButton" onAction="#logout" prefHeight="50.0" prefWidth="180.0" styleClass="logout-btn" text="🚪 KELUAR">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
          </VBox>
       </VBox>
-      
-      <Label layoutX="250.0" layoutY="470.0" text="© 2025 Sistem Keamanan - Dashboard v1.0" textFill="rgba(255,255,255,0.7)">
+      <Label layoutX="250.0" layoutY="470.0" text="© 2025 Sistem Keamanan - Dashboard v1.0" styleClass="dashboard-footer">
          <font>
             <Font size="11.0" />
          </font>
