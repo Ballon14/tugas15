@@ -79,6 +79,18 @@ public class LoginController {
         handleLogin();
     }
 
+    @FXML
+    private void handleRegisterButtonAction() {
+        try {
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("/login/register.fxml"));
+            stage.setScene(new Scene(root));
+            stage.centerOnScreen();
+        } catch (IOException e) {
+            showStatus("Gagal membuka halaman register: " + e.getMessage(), true);
+        }
+    }
+
     private void handleLogin() {
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();

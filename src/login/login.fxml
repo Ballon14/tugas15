@@ -74,7 +74,7 @@
                <Font size="14.0" />
             </font>
          </Button>
-         <Button fx:id="registerButton1" onAction="#handleRegisterButtonAction" prefHeight="45.0" prefWidth="220.0" style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.3, 0, 2);" text="DAFTAR">
+         <Button fx:id="registerButton" onAction="#handleRegisterButtonAction" prefHeight="45.0" prefWidth="220.0" style="-fx-background-color: #ddd; -fx-text-fill: #333; -fx-font-weight: bold; -fx-background-radius: 10; -fx-cursor: hand;" text="DAFTAR">
             <font>
                <Font size="14.0" />
             </font>
