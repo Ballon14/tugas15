@@ -47,7 +47,6 @@
             </TableView>
             <Pagination fx:id="paginationMatakuliah" maxPageIndicatorCount="10" pageCount="1" />
          </VBox>
-         <!-- Form input mahasiswa dan matakuliah akan di-load secara dinamis dari controller -->
       </StackPane>
    </center>
 </BorderPane>

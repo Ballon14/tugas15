@@ -54,7 +54,6 @@ public class LoginController {
     }
 
     private void setupKeyEvents() {
-        // Navigasi dengan tombol Enter
         usernameField.setOnKeyPressed(event -> {
             if (event.getCode().toString().equals("ENTER")) {
                 passwordField.requestFocus();
@@ -96,13 +95,11 @@ public class LoginController {
         String password = passwordField.getText().trim();
         String securityCode = securityCodeField.getText().trim();
 
-        // Validasi input kosong
         if (username.isEmpty() || password.isEmpty() || securityCode.isEmpty()) {
             showStatus("Harap isi semua field!", true);
             return;
         }
 
-        // Validasi kode keamanan
         if (!securityCode.equals(generatedCode)) {
             showStatus("Kode keamanan salah!", true);
             generateNewSecurityCode();
@@ -110,11 +107,9 @@ public class LoginController {
             return;
         }
 
-        // Debug: Print input values (remove in production)
         System.out.println("Debug - Username: '" + username + "'");
         System.out.println("Debug - Password: '" + password + "'");
 
-        // Validasi login dengan database
         if (validateUserFromDatabase(username, password)) {
             loginSuccess(username);
         } else {
@@ -123,7 +118,6 @@ public class LoginController {
     }
 
     private boolean validateUserFromDatabase(String username, String password) {
-        // Query yang lebih robust dengan LOWER untuk case-insensitive comparison
         String query = "SELECT username, password FROM users WHERE LOWER(username) = LOWER(?)";
         
         try (Connection connection = DatabaseConnection.connect()) {
@@ -140,11 +134,9 @@ public class LoginController {
                         String dbUsername = resultSet.getString("username");
                         String dbPassword = resultSet.getString("password");
                         
-                        // Debug: Print database values (remove in production)
                         System.out.println("Debug - DB Username: '" + dbUsername + "'");
                         System.out.println("Debug - DB Password: '" + dbPassword + "'");
                         
-                        // Simple password comparison (consider using hashing in production)
                         boolean passwordMatch = password.equals(dbPassword);
                         
                         if (!passwordMatch) {
@@ -191,7 +183,6 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboard.fxml"));
         Parent root = loader.load();
         
-        // Mengatur pesan selamat datang di dashboard
         DashboardController dashboardController = loader.getController();
         dashboardController.setWelcomeMessage(username);
         

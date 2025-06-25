@@ -72,7 +72,7 @@ public class RegisterController {
         try (Connection connection = DatabaseConnection.connect();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, username);
-            statement.setString(2, password); // Untuk produksi, gunakan hash password!
+            statement.setString(2, password);
             int rowsInserted = statement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {

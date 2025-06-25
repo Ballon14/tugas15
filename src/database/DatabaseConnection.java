@@ -23,7 +23,6 @@ public class DatabaseConnection {
         return connection;
     }
     
-    // Method untuk menutup koneksi
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {

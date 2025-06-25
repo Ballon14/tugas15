@@ -20,9 +20,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.scene.layout.StackPane;
-import javafx.scene.Node;
 
 public class DashboardController {
 
@@ -137,20 +135,16 @@ public class DashboardController {
 
     @FXML
     public void initialize() {
-        // Setup kolom mahasiswa
         colNama.setCellValueFactory(new PropertyValueFactory<>("namaLengkap"));
         colNim.setCellValueFactory(new PropertyValueFactory<>("nim"));
         colNoHp.setCellValueFactory(new PropertyValueFactory<>("noHp"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colJenisKelamin.setCellValueFactory(new PropertyValueFactory<>("jenisKelamin"));
-        // Setup kolom matakuliah
         colKodeMatakuliah.setCellValueFactory(new PropertyValueFactory<>("kodeMatakuliah"));
         colNamaMatakuliah.setCellValueFactory(new PropertyValueFactory<>("namaMatakuliah"));
         colSks.setCellValueFactory(new PropertyValueFactory<>("sks"));
-        // Load data awal
         loadMahasiswa();
         loadMatakuliah();
-        // Setup pagination
         paginationMahasiswa.setPageFactory(this::createMahasiswaPage);
         paginationMatakuliah.setPageFactory(this::createMatakuliahPage);
     }
@@ -250,7 +244,6 @@ public class DashboardController {
         showTablePage();
     }
 
-    // Model Mahasiswa
     public static class Mahasiswa {
         private final String namaLengkap, nim, noHp, email, jenisKelamin;
         public Mahasiswa(String namaLengkap, String nim, String noHp, String email, String jenisKelamin) {
@@ -266,7 +259,7 @@ public class DashboardController {
         public String getEmail() { return email; }
         public String getJenisKelamin() { return jenisKelamin; }
     }
-    // Model Matakuliah
+
     public static class Matakuliah {
         private final String kodeMatakuliah, namaMatakuliah;
         private final int sks;
