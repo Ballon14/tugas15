@@ -11,7 +11,7 @@ public class MainApp extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/login/login.fxml"));
 
-            primaryStage.setTitle("Aplikasi Login Keamanan");
+            primaryStage.setTitle("Aplikasi Manajemen Data Mahasiswa");
 
             Scene scene = new Scene(root);
             
