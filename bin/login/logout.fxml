@@ -7,47 +7,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" stylesheets="@login.css" styleClass="root-pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogoutController">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogoutController" style="-fx-background-color: #f5f6fa;">
    <children>
-      <VBox alignment="CENTER" layoutX="50.0" layoutY="100.0" prefWidth="300.0" spacing="30.0" styleClass="login-card">
-         <padding>
-            <Insets bottom="40.0" left="30.0" right="30.0" top="40.0" />
-         </padding>
-         
+      <VBox alignment="CENTER" layoutX="50.0" layoutY="100.0" prefWidth="300.0" spacing="30.0" style="-fx-background-color: #fff; -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 20, 0.5, 0, 5); -fx-padding: 40 30 40 30;">
          <VBox alignment="CENTER" spacing="20.0">
-            <Label text="✓" textFill="#27ae60">
-               <font>
-                  <Font name="System Bold" size="48.0" />
-               </font>
-            </Label>
-            
-            <Label text="LOGOUT BERHASIL" textAlignment="CENTER" styleClass="login-title">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-            
-            <Label text="Anda sudah keluar dari aplikasi" textAlignment="CENTER" styleClass="login-subtitle">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
+            <Label text="✓" style="-fx-text-fill: #27ae60; -fx-font-size: 48px; -fx-font-weight: bold;" />
+            <Label text="LOGOUT BERHASIL" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2563eb;" />
+            <Label text="Anda sudah keluar dari aplikasi" style="-fx-font-size: 16px; -fx-text-fill: #444;" />
          </VBox>
-         
          <VBox alignment="CENTER" spacing="15.0">
-            
-            <Button fx:id="backToLoginButton" onAction="#backToLogin" prefHeight="45.0" prefWidth="200.0" styleClass="login-btn" text="🔄 KEMBALI KE LOGIN">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Button>
+            <Button fx:id="backToLoginButton" onAction="#backToLogin" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-font-size: 12px;" text="🔄 KEMBALI KE LOGIN" />
          </VBox>
       </VBox>
-      
-      <Label layoutX="120.0" layoutY="470.0" text="© 2025 Sistem Keamanan - Logout v1.0" styleClass="dashboard-footer">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
+      <Label layoutX="120.0" layoutY="470.0" text="© 2025 Sistem Keamanan - Logout v1.0" style="-fx-text-fill: rgba(34,34,34,0.7); -fx-font-size: 11px; -fx-font-family: 'Poppins', 'Segoe UI', Arial, sans-serif; -fx-padding: 10 0 0 0;" />
    </children>
 </AnchorPane>

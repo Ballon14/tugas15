@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InputMahasiswaController">
+   <children>
+      <VBox alignment="CENTER" maxWidth="400.0" spacing="10.0" style="-fx-background-color: #f8f9ff; -fx-padding: 24 24 24 24;">
+         <Label text="Input Data Mahasiswa" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2563eb; -fx-padding: 0 0 10 0;" />
+         <Label text="Nama Lengkap" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: #222;" />
+         <TextField fx:id="namaLengkapField" promptText="Nama Lengkap" style="-fx-font-size: 13px; -fx-background-color: #fff;" />
+         <Label text="NIM" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: #222;" />
+         <TextField fx:id="nimField" promptText="NIM" style="-fx-font-size: 13px; -fx-background-color: #fff;" />
+         <Label text="No HP" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: #222;" />
+         <TextField fx:id="noHpField" promptText="No HP" style="-fx-font-size: 13px; -fx-background-color: #fff;" />
+         <Label text="Email" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: #222;" />
+         <TextField fx:id="emailField" promptText="Email" style="-fx-font-size: 13px; -fx-background-color: #fff;" />
+         <HBox alignment="CENTER_LEFT" spacing="8.0">
+            <Label text="Jenis Kelamin:" style="-fx-font-size: 13px; -fx-font-weight: 600; -fx-text-fill: #222;" />
+            <RadioButton fx:id="lakiRadio" text="Laki-laki" />
+            <RadioButton fx:id="perempuanRadio" text="Perempuan" />
+         </HBox>
+         <HBox alignment="CENTER" spacing="10.0" style="-fx-padding: 8 0 0 0;">
+            <Button fx:id="btnSimpan" onAction="#handleSimpan" text="Simpan"
+                style="-fx-background-color: #10b981; -fx-text-fill: #fff; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 28 8 28;" />
+            <Button fx:id="btnBatal" onAction="#handleBatal" text="Batal"
+                style="-fx-background-color: #f3f4f6; -fx-text-fill: #374151; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 10; -fx-padding: 8 24 8 24;" />
+         </HBox>
+         <Label fx:id="statusLabel" style="-fx-text-fill: #e74c3c; -fx-font-size: 12px; -fx-font-weight: 600; -fx-padding: 10 0 0 0;" />
+      </VBox>
+   </children>
+</StackPane>
