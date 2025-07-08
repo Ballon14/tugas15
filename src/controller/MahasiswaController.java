@@ -1,18 +1,15 @@
 package controller;
 
 import database.DatabaseConnection;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import model.Mahasiswa;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,49 +17,47 @@ import java.sql.Statement;
 
 public class MahasiswaController {
     @FXML
-    private TableView<Mahasiswa> tableMahasiswa;
+    private TableView<ObservableList<Object>> tableMahasiswa;
     @FXML
-    private TableColumn<Mahasiswa, Integer> colNo;
+    private TableColumn<ObservableList<Object>, Integer> colNo;
     @FXML
-    private TableColumn<Mahasiswa, Integer> colNim;
+    private TableColumn<ObservableList<Object>, Integer> colNim;
     @FXML
-    private TableColumn<Mahasiswa, String> colKelas;
+    private TableColumn<ObservableList<Object>, String> colKelas;
     @FXML
-    private TableColumn<Mahasiswa, Double> colIpk;
+    private TableColumn<ObservableList<Object>, Double> colIpk;
     @FXML
-    private TableColumn<Mahasiswa, Integer> colSemester;
+    private TableColumn<ObservableList<Object>, Integer> colSemester;
     @FXML
-    private TableColumn<Mahasiswa, Integer> colTotalSks;
+    private TableColumn<ObservableList<Object>, Integer> colTotalSks;
     @FXML
     private Button btnTambah;
 
-    private ObservableList<Mahasiswa> mahasiswaList = FXCollections.observableArrayList();
-
     @FXML
     public void initialize() {
-        colNo.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colNim.setCellValueFactory(new PropertyValueFactory<>("nim"));
-        colKelas.setCellValueFactory(new PropertyValueFactory<>("kelas"));
-        colIpk.setCellValueFactory(new PropertyValueFactory<>("ipk"));
-        colSemester.setCellValueFactory(new PropertyValueFactory<>("semester"));
-        colTotalSks.setCellValueFactory(new PropertyValueFactory<>("totalSks"));
+        colNo.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get(0)));
+        colNim.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get(1)));
+        colKelas.setCellValueFactory(data -> new SimpleObjectProperty<>((String) data.getValue().get(2)));
+        colIpk.setCellValueFactory(data -> new SimpleObjectProperty<>((Double) data.getValue().get(3)));
+        colSemester.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get(4)));
+        colTotalSks.setCellValueFactory(data -> new SimpleObjectProperty<>((Integer) data.getValue().get(5)));
         loadData();
     }
 
     private void loadData() {
-        mahasiswaList.clear();
+        ObservableList<ObservableList<Object>> mahasiswaList = FXCollections.observableArrayList();
         try (Connection conn = DatabaseConnection.connect();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM mahasiswa")) {
+             ResultSet rs = stmt.executeQuery("SELECT id, nim, kelas, ipk, semester, total_sks FROM mahasiswa")) {
             while (rs.next()) {
-                mahasiswaList.add(new Mahasiswa(
-                        rs.getInt("id"),
-                        rs.getInt("nim"),
-                        rs.getString("kelas"),
-                        rs.getDouble("ipk"),
-                        rs.getInt("semester"),
-                        rs.getInt("total_sks")
-                ));
+                ObservableList<Object> row = FXCollections.observableArrayList();
+                row.add(rs.getInt("id"));
+                row.add(rs.getInt("nim"));
+                row.add(rs.getString("kelas"));
+                row.add(rs.getDouble("ipk"));
+                row.add(rs.getInt("semester"));
+                row.add(rs.getInt("total_sks"));
+                mahasiswaList.add(row);
             }
             tableMahasiswa.setItems(mahasiswaList);
         } catch (Exception e) {
