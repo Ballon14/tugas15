@@ -2,16 +2,14 @@ package model;
 
 public class Mahasiswa {
     private int id;
-    private int no;
     private int nim;
     private String kelas;
     private double ipk;
     private int semester;
     private int totalSks;
 
-    public Mahasiswa(int id, int no, int nim, String kelas, double ipk, int semester, int totalSks) {
+    public Mahasiswa(int id, int nim, String kelas, double ipk, int semester, int totalSks) {
         this.id = id;
-        this.no = no;
         this.nim = nim;
         this.kelas = kelas;
         this.ipk = ipk;
@@ -20,7 +18,6 @@ public class Mahasiswa {
     }
 
     public int getId() { return id; }
-    public int getNo() { return no; }
     public int getNim() { return nim; }
     public String getKelas() { return kelas; }
     public double getIpk() { return ipk; }

@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import model.Mahasiswa;
 
 import java.sql.Connection;
@@ -41,7 +40,7 @@ public class MahasiswaController {
 
     @FXML
     public void initialize() {
-        colNo.setCellValueFactory(new PropertyValueFactory<>("no"));
+        colNo.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNim.setCellValueFactory(new PropertyValueFactory<>("nim"));
         colKelas.setCellValueFactory(new PropertyValueFactory<>("kelas"));
         colIpk.setCellValueFactory(new PropertyValueFactory<>("ipk"));
@@ -57,9 +56,7 @@ public class MahasiswaController {
              ResultSet rs = stmt.executeQuery("SELECT * FROM mahasiswa")) {
             while (rs.next()) {
                 mahasiswaList.add(new Mahasiswa(
-                        // id diisi 0 atau rs.getInt("id") tapi tidak digunakan
-                        0,
-                        rs.getInt("no"),
+                        rs.getInt("id"),
                         rs.getInt("nim"),
                         rs.getString("kelas"),
                         rs.getDouble("ipk"),
@@ -76,12 +73,9 @@ public class MahasiswaController {
     @FXML
     private void handleTambah(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/form_tambah_mahasiswa.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Tambah Data Mahasiswa");
-            stage.setScene(new Scene(root));
-            stage.show();
+            Parent formTambah = FXMLLoader.load(getClass().getResource("/view/form_tambah_mahasiswa.fxml"));
+            Stage stage = (Stage) tableMahasiswa.getScene().getWindow();
+            stage.getScene().setRoot(formTambah);
         } catch (Exception e) {
             e.printStackTrace();
         }
