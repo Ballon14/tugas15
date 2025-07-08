@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefWidth="625.0" spacing="20" style="-fx-background-color: #f4f6fa; -fx-padding: 32;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MahasiswaController">
+    <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2d3a4b;" text="Hasil Belajar Mahasiswa" />
+    <TableView fx:id="tableMahasiswa" prefHeight="400.0" prefWidth="650.0" style="-fx-background-radius: 8; -fx-border-radius: 8;">
+        <columns>
+            <TableColumn fx:id="colNo" prefWidth="60" text="No" />
+            <TableColumn fx:id="colNim" prefWidth="120" text="NIM" />
+            <TableColumn fx:id="colKelas" prefWidth="120" text="Kelas" />
+            <TableColumn fx:id="colIpk" prefWidth="80" text="IPK" />
+            <TableColumn fx:id="colSemester" prefWidth="80" text="Semester" />
+            <TableColumn fx:id="colTotalSks" prefWidth="120" text="Total SKS" />
+        </columns>
+    </TableView>
+    <Button fx:id="btnTambah" onAction="#handleTambah" style="-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 8 32; -fx-background-radius: 6;" text="Tambah Data Mahasiswa" />
+</VBox>

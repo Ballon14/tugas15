@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" spacing="16" style="-fx-padding: 32; -fx-background-color: #f4f6fa;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FormTambahMahasiswaController">
+    <Label text="Tambah Data Hasil Belajar Mahasiswa" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2d3a4b;"/>
+    <GridPane hgap="12" vgap="12">
+        <Label text="No:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfNo" promptText="No" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="NIM:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfNim" promptText="NIM" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Kelas:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfKelas" promptText="Kelas" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <Label text="IPK:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfIpk" promptText="IPK" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+        <Label text="Semester:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfSemester" promptText="Semester" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        <Label text="Total SKS:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <TextField fx:id="tfTotalSks" promptText="Total SKS" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+    </GridPane>
+    <HBox spacing="16" alignment="CENTER">
+        <Button text="Simpan" fx:id="btnSimpan" onAction="#handleSimpan" style="-fx-background-color: #1976d2; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 6 24; -fx-background-radius: 6;"/>
+        <Button text="Batal" fx:id="btnBatal" onAction="#handleBatal" style="-fx-background-color: #b0bec5; -fx-text-fill: #263238; -fx-font-size: 14px; -fx-padding: 6 24; -fx-background-radius: 6;"/>
+    </HBox>
+</VBox> 

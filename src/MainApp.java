@@ -5,25 +5,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/login/login.fxml"));
-
-            primaryStage.setTitle("Aplikasi Manajemen Data Mahasiswa");
-
-            Scene scene = new Scene(root);
-            
-            primaryStage.setScene(scene);
-            primaryStage.setResizable(false); 
-            primaryStage.centerOnScreen();
-            primaryStage.show();
-            
-        } catch (Exception e) {
-            System.err.println("Error loading login page: " + e.getMessage());
-            e.printStackTrace();
-        }
+        Parent root = FXMLLoader.load(getClass().getResource("/view/mahasiswa.fxml"));
+        primaryStage.setTitle("Data Mahasiswa");
+        primaryStage.setScene(new Scene(root, 600, 500));
+        primaryStage.setResizable(false); 
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
